@@ -1,0 +1,10 @@
+-
+ name: Show Dates
+ hosts: [dev-servers,prd-servers]
+ tasks:
+   - name: View Date:
+     command: date
+
+   - name: Instance run time
+     command: uptime
+    

@@ -1,0 +1,10 @@
+---
+- name : Deploy Website
+  hosts : [all-servers]
+  become : yes
+  tasks :
+    - name : Deploy Site
+      ansible.builtin.copy:
+        src : /home/ubuntu/webproject/index.html
+        dest : /var/www/html
+   

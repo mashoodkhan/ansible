@@ -1,0 +1,23 @@
+-
+ name: Deploy Website
+ hosts : all
+ become : yes
+ tasks :
+   - name : Install nginx
+     package :
+       name : nginx
+       state: latest
+
+   - name : Start nginx
+     service :
+       name : nginx
+       state : started
+       enabled : yes
+
+   - name : deploy webpage
+     copy :
+       src : /home/ubuntu/webproject/index.html
+       dest : /var/www/html
+       owner : root
+       group : root
+       mode : '0644'
