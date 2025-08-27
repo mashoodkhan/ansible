@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Create 3 EC2 instances
+      amazon.aws.ec2_instance:
+        name: "{{ item.name }}"
+        key_name: "Jenkins"
+        instance_type: t2.micro
+        security_group: default
+        region: us-east-2
+        network:
+          assign_public_ip: true
+        image_id: "{{ item.image }}"
+        tags:
+          Environment: Testing
+      loop:
+        - { image: "ami-0d1b5a8c13042c939", name: "test-env-1" }
+        - { image: "ami-0b016c703b95ecbe4", name: "test-env-2" }
+        - { image: "ami-0b016c703b95ecbe4", name: "test-env-3" }
